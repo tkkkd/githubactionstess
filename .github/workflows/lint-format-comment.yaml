@@ -29,4 +29,4 @@ jobs:
         with:
           tool_name: ruff
       - name: Echo ruff result
-        run: exho ${{ steps.ruff.outcome }}
+        run: echo ${{ steps.ruff.outcome }}
