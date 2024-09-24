@@ -14,10 +14,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install ruff
       - name: Lint with Ruff
+        id: ruff
         run: |
           ruff check . --fix
           ruff format .
-        continue-on-error: true
-      - uses: reviewdog/action-suggester@v1
+      - name: add comments
+        if: ${{ steps.ruff.outcome == 'failure' }}
+        uses: reviewdog/action-suggester@v1
         with:
           tool_name: ruff
