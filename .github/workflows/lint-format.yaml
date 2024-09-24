@@ -15,5 +15,10 @@ jobs:
           pip install ruff
       - name: Lint with Ruff
         run: |
-          ruff check --output-format=github .
+          ruff check . --fix
+          ruff format .
         continue-on-error: true
+      - name: Auto Commit
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: lint & format by ruff
