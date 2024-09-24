@@ -29,4 +29,5 @@ jobs:
         with:
           tool_name: ruff
       - name: Echo ruff result
-        run: echo ${{ steps.ruff-check.outcome }}
+        if: ${{ steps.ruff-check.outcome == 'failure' }}
+        run: exit 1
