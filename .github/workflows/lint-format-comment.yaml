@@ -18,6 +18,7 @@ jobs:
         run: |
           ruff check .
           ruff format . --check
+        continue-on-error: true
       - name: Lint with Ruff
         if: ${{ steps.ruff.outcome == 'failure' }}
         run: |
