@@ -25,5 +25,8 @@ jobs:
           ruff check . --fix
           ruff format .
       - uses: reviewdog/action-suggester@v1
+        if: ${{ steps.ruff.outcome == 'failure' }}
         with:
           tool_name: ruff
+      - name: Echo ruff result
+        run: exho ${{ steps.ruff.outcome }}
