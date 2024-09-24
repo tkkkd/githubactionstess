@@ -14,19 +14,19 @@ jobs:
           python -m pip install --upgrade pip
           pip install ruff
       - name: Check Lint and Format
-        id: ruff
+        id: ruff-check
         run: |
           ruff check .
           ruff format . --check
         continue-on-error: true
       - name: Lint with Ruff
-        if: ${{ steps.ruff.outcome == 'failure' }}
+        if: ${{ steps.ruff-check.outcome == 'failure' }}
         run: |
           ruff check . --fix
           ruff format .
       - uses: reviewdog/action-suggester@v1
-        if: ${{ steps.ruff.outcome == 'failure' }}
+        if: ${{ steps.ruff-check.outcome == 'failure' }}
         with:
           tool_name: ruff
       - name: Echo ruff result
-        run: echo ${{ steps.ruff.outcome }}
+        run: echo ${{ steps.ruff-check.outcome }}
