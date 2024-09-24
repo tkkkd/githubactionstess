@@ -23,6 +23,6 @@ jobs:
         run: |
           ruff check . --fix
           ruff format .
-        uses: reviewdog/action-suggester@v1
+      - uses: reviewdog/action-suggester@v1
         with:
           tool_name: ruff
